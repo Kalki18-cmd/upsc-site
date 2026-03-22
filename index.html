@@ -2,23 +2,57 @@
 <html>
 <head>
   <title>UPSC Daily Topics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    #date {
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .news-item {
+      background: #fff;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .news-item b {
+      color: #2980b9;
+    }
+  </style>
 </head>
 <body>
   <h1>UPSC News Feed</h1>
+  <h2 id="date"></h2>
   <div id="news"></div>
  
   <script>
-    const news = [
-      {title: "Union Budget 2026 Highlights", summary: "Key points for UPSC"},
-      {title: "Supreme Court ruling on Article 370", summary: "Important for Polity"}
-    ];
+    // Show today's date automatically
+    const today = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById("date").innerText = "Updated on: " + today.toLocaleDateString("en-IN", options);
  
-    const container = document.getElementById("news");
-    news.forEach(item => {
-      const div = document.createElement("div");
-      div.innerHTML = <b>${item.title}</b><br>${item.summary}<hr>;
-      container.appendChild(div);
-    });
+    // Load headlines from news.json
+    fetch("news.json")
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("news");
+        data.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "news-item";
+          div.innerHTML = <b>${item.title}</b><br>${item.summary};
+          container.appendChild(div);
+        });
+      });
   </script>
 </body>
 </html>
