@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>UPSC Daily Topics</title>
+</head>
+<body>
+  <h1>UPSC News Feed</h1>
+  <div id="news"></div>
+ 
+  <script>
+    const news = [
+      {title: "Union Budget 2026 Highlights", summary: "Key points for UPSC"},
+      {title: "Supreme Court ruling on Article 370", summary: "Important for Polity"}
+    ];
+ 
+    const container = document.getElementById("news");
+    news.forEach(item => {
+      const div = document.createElement("div");
+      div.innerHTML = <b>${item.title}</b><br>${item.summary}<hr>;
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>
